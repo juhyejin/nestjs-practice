@@ -1,10 +1,10 @@
 import { Column, Entity, Index, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity("user")
 export class User{
 
     @PrimaryGeneratedColumn()
-    seq:number;
+    id:number;
 
     @Column()
     userName:string;

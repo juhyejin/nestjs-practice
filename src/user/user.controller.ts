@@ -1,4 +1,5 @@
-import { Controller, Get, Param} from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards,Request} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { User } from './entitles/user.entity';
 import { UserService } from './user.service';
 
@@ -14,5 +15,10 @@ export class UserController {
     @Get(':id')
     findOne(@Param('id') id:string): Promise<User>{
         return this.userService.findOne(id);
+    }
+    @UseGuards(AuthGuard('local'))
+    @Post()
+    async login(@Request()req){
+        return req.user;
     }
 }
